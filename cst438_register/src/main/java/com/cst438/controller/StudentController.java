@@ -1,3 +1,4 @@
+
 package com.cst438.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,26 +47,26 @@ public class StudentController
       }
    }
    //Hold on Student Registration
-   @PostMapping("/student/add-hold")
+   @PostMapping("/student/addhold")
    @Transactional
    public void setHold(@PathVariable String email) {
       Student student = getStudent(email);
       if (student == null) {
-         System.out.println("Student hasn't been registered/does not exist.");
-         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student hasn't been registered/does not exist.");
+         System.out.println("Student hasn't been registered or does not exist.");
+         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student hasn't been registered or does not exist.");
       }else {student.setStatusCode(1);
       student.setStatus("Hold");
       studentRepository.save(student);
       }
    }
    //Releasing a hold on Student Registration
-   @PostMapping("/student/release-hold")
+   @PostMapping("/student/releasehold")
    @Transactional
    public void releaseHold(@PathVariable String email) {
       Student student = getStudent(email);
       if (student == null) {
-         System.out.println("Student hasn't been registered/does not exist.");
-         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student hasn't been registered/does not exist.");
+         System.out.println("Student hasn't been registered or does not exist.");
+         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student hasn't been registered or does not exist.");
       } else {student.setStatusCode(0);
       student.setStatus("No Holds.");
       studentRepository.save(student);
